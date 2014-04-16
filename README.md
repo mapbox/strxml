@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mapbox/strxml.svg)](https://travis-ci.org/mapbox/strxml)
+
 # strxml
 
 Create xml with strings and concatenation.
