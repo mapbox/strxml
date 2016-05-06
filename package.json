@@ -1,6 +1,6 @@
 {
   "name": "strxml",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "create xml with functions and strings",
   "main": "index.js",
   "scripts": {
