@@ -10,7 +10,7 @@ Create xml with strings and concatenation.
 
 ## api
 
-* `tag(el, contents, attributes)`
+* `tag(el, [attributes], contents)`
 * `tagClose(el, attributes)`
 * `encode(str)`
 * `attr(attributes)`
@@ -23,16 +23,8 @@ var tag = require('xmlstr').tag;
 
 tag('Layer',
     tag('StyleName', 'style-' + i) +
-    tag('Datasource',
-        [
-            ['type', 'ogr'],
-            ['layer_by_index', '0'],
-            ['driver', 'GeoJson'],
-            ['string', JSON.stringify(feature.geometry)]
-        ].map(function(a) {
-            return tag('Parameter', a[1], [['name', a[0]]]);
-        }).join('')), [
-            ['name', 'layer-' + i],
-            ['srs', WGS84]
-        ]);
+    tag('Datasource', {
+      name: 'layer-' + i,
+      srs: WGS84
+    }));
 ```

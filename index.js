@@ -1,16 +1,18 @@
+var esc = require('xml-escape');
+
 module.exports.attr = attr;
 module.exports.tagClose = tagClose;
 module.exports.tag = tag;
-module.exports.encode = encode;
 
 /**
  * @param {array} _ an array of attributes
  * @returns {string}
  */
-function attr(_) {
-    return (_ && _.length) ? (' ' + _.map(function(a) {
-        return a[0] + '="' + a[1] + '"';
-    }).join(' ')) : '';
+function attr(attributes) {
+    if (!Object.keys(attributes).length) return '';
+    return ' ' + Object.keys(attributes).map(function(key) {
+        return key + '="' + esc(attributes[key]) + '"';
+    }).join(' ');
 }
 
 /**
@@ -28,17 +30,13 @@ function tagClose(el, attributes) {
  * @param {array} attributes array of pairs
  * @returns {string}
  */
-function tag(el, contents, attributes) {
+function tag(el, attributes, contents) {
+    if (Array.isArray(attributes) || typeof attributes === 'string') {
+        contents = attributes;
+        attributes = {};
+    }
+    if (Array.isArray(contents)) contents = '\n' + contents.map(function(content) {
+        return '  ' + content;
+    }).join('\n') + '\n';
     return '<' + el + attr(attributes) + '>' + contents + '</' + el + '>';
-}
-
-/**
- * @param {string} _ a string of attribute
- * @returns {string}
- */
-function encode(_) {
-    return (_ === null ? '' : _.toString()).replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
 }
