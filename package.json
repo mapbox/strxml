@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/mapbox/strxml",
   "dependencies": {
-    "tap": "~0.4.8",
     "xml-escape": "1.1.0"
+  },
+  "devDependencies": {
+    "tap": "~0.4.8"
   }
 }
