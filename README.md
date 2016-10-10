@@ -19,7 +19,7 @@ Create xml with strings and concatenation.
 
 ```js
 
-var tag = require('xmlstr').tag;
+var tag = require('strxml').tag;
 
 tag('Layer',
     tag('StyleName', 'style-' + i) +
